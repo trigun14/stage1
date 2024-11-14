@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: trigun14/stage1
-          ref: main  # Checkout 'main' branch of stage repository
+          ref: main  # Checkout 'main' branch of stage1 repository
           path: stage-repo  # Check it out to a separate directory to avoid conflicts
 
 
