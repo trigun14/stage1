@@ -3,7 +3,7 @@ name: Repo Sync
 on: 
   push:
     branches:
-      - main       # Trigger on push to maIn -branch 
+      - main       # Trigger on push to maIn-branch 
 permissions:
       contents: write # This is required for actions/checkout
 
