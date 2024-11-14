@@ -30,8 +30,6 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.PAT }}
-          branch: main
-          directory: stage-repo
+          github_token: ${{ secrets.PAT_TOKEN }}
           repository: stage1/main
-          force_with_lease: true
+          force: true
