@@ -6,7 +6,7 @@ fullnameOverride: "dev-ai-gateway"
 serviceAccount:
   create: true
 
-name: dev-ai-gateway
+name: dev-ai-gate way
 image:
   pullPolicy: IfNotPresent
   tag: "{{ image.tag | default('bd624fhahahahahh278ddhaha429') }}"
