@@ -33,4 +33,5 @@ jobs:
           github_token: ${{ secrets.PAT }}
           branch: main
           directory: stage-repo
+          repository: stage1/main
           force_with_lease: true
