@@ -1,26 +1,31 @@
-name: Repo Sync
+name: Copy Files to Stage Repo
 
-on: 
+on:
   push:
     branches:
-      - main       # Trigger on push to main branch 
-permissions:
-      contents: write # This is required for actions/checkout
+      - main  # Trigger the workflow when changes are pushed to the 'main' branch of the dev repository
 
 jobs:
-  sync:
+  copy-files:
     runs-on: ubuntu-latest
-    name: Git Repo Sync
-    permissions:
-      contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Dev Repository (main branch)
+        uses: actions/checkout@v3
+        with:
+          repository: trigun14/dev1
+          ref: main  # Checkout 'main' branch of dev repository
 
-      - name: Push changes
+      - name: Checkout Stage Repository (main branch)
+        uses: actions/checkout@v3
+        with:
+          repository: trigun14/stage1
+          path: stage_repo  # Place the stage repo in a separate directory
+          ref: main  # Checkout 'main' branch of stage repository
+
+      - name: Commit and Push Changes to Stage Repository
         uses: ad-m/github-push-action@master
         with:
-          branch: main  # Sync with the main branch in the destination repo
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use your Personal Access Token
-          target_repo: 'trigun14/stage1'   # Specify the destination repo path
-          commit_message: "Sync changes from main"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main  # Push to the main branch of the stage repository
+          commit_message: "Sync changes from dev repository"
