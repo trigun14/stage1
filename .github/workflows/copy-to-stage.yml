@@ -1,13 +1,9 @@
-name: Repo Sync and Validate Links
+name: Validate Links and Sync Repo
 
 on:
   push:
     branches:
-      - main       # Trigger on push to main branch for repo sync
-      - master     # Trigger on push to master branch for link validation
-  schedule:
-    # Run the link validation job on working days at 12:00
-    - cron: 0 12 * * 0-5
+      - master  # Trigger on push to master branch
 
 jobs:
   validate-links:
@@ -22,22 +18,17 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   sync:
+    name: Sync Repo to Another Repository
     runs-on: ubuntu-latest
-    name: Git Repo Sync
-    needs: validate-links  # Ensure that the "Validate Links" job runs first
-    permissions:
-      contents: write  # Required for actions/checkout
-
+    needs: validate-links  # Ensure the validate-links job completes first
     steps:
       - uses: actions/checkout@v3  # Checkout the code
 
       - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+        uses: o/github-sync-action@v1
         with:
-          source-directory: '.'
-          destination-github-username: 'trigun14'
-          destination-repository-name: 'stage1'
-          user-email: trigunanandmishra@07gmail.com
-          target-branch: main
+          github_token: ${{ secrets.PAT }}
+          source_repo: 'trigun14/dev'
+          target_repo: 'trigun14/stage1'
+          target_branch: 'main'
+          force_push: true
