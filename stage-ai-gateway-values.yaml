@@ -5,12 +5,11 @@ fullnameOverride: "dev-ai-gateway"
 
 serviceAccount:
   create: true
- d
 
 name: dev-ai-gateway
 image:
-  pullPolicy: IfNotPrese  nt
-  tag: bd624fhahahahahh278ddhaha429
+  pullPolicy: IfNotPresent
+  tag: "{{ image.tag | default('bd624fhahahahahh278ddhaha429') }}"
   command: [node, dist/apps/ai-gateway/apps/ai-gateway/src/main]
   resources:
     requests:
