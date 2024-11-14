@@ -1,0 +1,31 @@
+name: Repo Sync
+
+on: 
+  push:
+    branches:
+      - main       # Trigger on push to maIn -branch 
+  delete:          # Trigger on delete event to keep sync aligned
+ permissions:
+      contents: write # This is required for actions/checkout
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    name: Git Repo Sync
+    permissions:
+      contents: write
+
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PAT }}
+        with:
+          source-directory: '.'
+          destination-github-username: 'trigun14'
+          destination-repository-name: 'stage1'
+          user-email: trigunanandmishra@07gmail.com
+          target-branch: main
