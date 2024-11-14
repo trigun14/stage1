@@ -25,10 +25,6 @@ jobs:
           ref: main  # Checkout 'main' branch of stage repository
           path: stage-repo  # Check it out to a separate directory to avoid conflicts
 
-      # Step 3: Copy Files from Dev1 to Stage
-      - name: Copy Files
-        run: |
-          rsync -av --exclude='.git' ./ stage-repo/  # Copy everything except the .git folder to the stage-repo directory
 
       # Step 4: Commit and Push Changes to Stage Repository
       - name: Push changes
