@@ -17,5 +17,5 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.PAT_TOKEN }}
-        repository: stage1/main
+        repository: trigun14/stage1
         force: true
