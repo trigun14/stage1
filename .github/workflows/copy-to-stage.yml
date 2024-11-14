@@ -3,7 +3,7 @@ name: Validate Links and Sync Repo
 on:
   push:
     branches:
-      - master  # Trigger on push to master branch
+      - main  # Trigger on push to master branch
 
 jobs:
   validate-links:
@@ -27,8 +27,8 @@ jobs:
       - name: Pushes to another repository
         uses: o/github-sync-action@v1
         with:
-          github_token: ${{ secrets.PAT }}
-          source_repo: 'trigun14/dev'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_repo: 'trigun14/dev1'
           target_repo: 'trigun14/stage1'
           target_branch: 'main'
           force_push: true
