@@ -10,20 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout Dev1 Repository
       - name: Checkout Dev1 Repository (main branch)
         uses: actions/checkout@v3
         with:
           repository: trigun14/dev1
           ref: main  # Checkout 'main' branch of dev1 repository
 
-      - name: Push Files to Stage Repository
-        uses: nkoppel/push-files-to-another-repository@v1.1.3
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN  }}
+      # Step 2: Checkout Stage Repository as Destination
+      - name: Checkout Stage Repository (main branch)
+        uses: actions/checkout@v3
         with:
-          source-files: '.'  # Sync all files from the root directory of dev1
-          destination-username: 'trigun14'
-          destination-repository: 'stage1'
-          destination-directory: '.'  # Place files in the root of the destination repo
-          commit-message: "Sync changes from dev1 repository"
-          commit-email: 'your-email@example.com'  # Replace with your email
+          repository: trigun14/stage
+          ref: main  # Checkout 'main' branch of stage repository
+          path: stage-repo  # Check it out to a separate directory to avoid conflicts
+
+      # Step 3: Copy Files from Dev1 to Stage
+      - name: Copy Files
+        run: |
+          rsync -av --exclude='.git' ./ stage-repo/  # Copy everything except the .git folder to the stage-repo directory
+
+      # Step 4: Commit and Push Changes to Stage Repository
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main  # Push to the main branch of the stage repository
+          directory: .  # Specify the destination repo directory for the push
+          commit_message: "Sync changes from dev1 repository"
