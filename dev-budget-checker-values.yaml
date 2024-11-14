@@ -5,7 +5,7 @@ fullnameOverride: "dev-budget-checker"
 
 name: dev-budget-checker
   tag: bd624fhahahahahh278ddhaha429
-  command: [npm, run, start:scheduled-task]
+  command: [npm, run, stcart:scheduled-task]
   resources:
     requests:
       memory: "256Mi"
