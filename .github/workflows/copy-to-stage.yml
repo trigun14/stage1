@@ -10,9 +10,21 @@ on:
     - cron: 0 12 * * 0-5
 
 jobs:
+  validate-links:
+    name: Validate Links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4  # Checkout the code
+
+      - name: Validate links
+        uses: ad-m/report-link-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
   sync:
     runs-on: ubuntu-latest
     name: Git Repo Sync
+    needs: validate-links  # Ensure that the "Validate Links" job runs first
     permissions:
       contents: write  # Required for actions/checkout
 
@@ -29,15 +41,3 @@ jobs:
           destination-repository-name: 'stage1'
           user-email: trigunanandmishra@07gmail.com
           target-branch: main
-
-  validate-links:
-    name: Validate Links
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'  # Ensure this job runs only on master
-    steps:
-      - uses: actions/checkout@v4  # Checkout the code
-
-      - name: Validate links
-        uses: ad-m/report-link-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
