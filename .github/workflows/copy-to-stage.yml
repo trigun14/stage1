@@ -22,7 +22,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN  }}
         with:
           source-files: '.'  # Sync all files from the root directory of dev1
-          destination-username: 'trigun14'
+          destination-username: '/trigun14'
           destination-repository: 'stage1'
           destination-directory: '.'  # Place files in the root of the destination repo
           commit-message: "Sync changes from dev1 repository"
