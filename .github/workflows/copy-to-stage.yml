@@ -31,9 +31,10 @@ jobs:
           rsync -av --exclude='.git' ./ stage-repo/  # Copy everything except the .git folder to the stage-repo directory
 
       # Step 4: Commit and Push Changes to Stage Repository
-      - name: Push changes
+       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main  # Push to the main branch of the stage repository
-          commit_message: "Sync changes from dev1 repository"
+          branch: main
+          directory: stage-repo
+          force_with_lease: true
