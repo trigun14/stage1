@@ -1,0 +1,14 @@
+# Sync files from dev1 repository to stage repository with renaming
+user/stage:
+  - source: dev-ai-gateway-values.yaml
+    dest: stage-ai-gateway-values.yaml
+  - source: dev-api-env-values.yaml
+    dest: stage-api-env-values.yaml
+  - source: dev-budget-checker-values.yaml
+    dest: stage-budget-checker-values.yaml
+  - source: dev-bullboard-values.yaml
+    dest: stage-bullboard-values.yaml
+  - source: dev-catalog-automation-values.yaml
+    dest: stage-catalog-automation-values.yaml
+  - source: dev-common-values.yaml
+    dest: stage-common-values.yaml
