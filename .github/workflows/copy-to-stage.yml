@@ -5,7 +5,7 @@ on:
     branches:
       - main       # Trigger on push to maIn-branch 
 permissions:
-      contents: write # This is required for actions/checkout
+      contents: write # This is  required for actions/checkout
 
 jobs:
   sync:
