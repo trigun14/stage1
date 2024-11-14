@@ -5,7 +5,7 @@ fullnameOverride: "dev-ai-gateway"
 
 serviceAccount:
   create: true
- 
+ d
 
 name: dev-ai-gateway
 image:
