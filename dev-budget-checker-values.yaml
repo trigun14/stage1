@@ -1,0 +1,197 @@
+replicaCount: 1
+imagePullSecrets: []
+nameOverride: "dev-budget-checker"
+fullnameOverride: "dev-budget-checker"
+
+name: dev-budget-checker
+  tag: bd624fhahahahahh278ddhaha429
+  command: [npm, run, start:scheduled-task]
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "200m"
+    limits:
+      memory: "300Mi"
+      cpu: "200m"
+
+env:
+  NODE_OPTIONS:
+    name: NODE_OPTIONS
+    value: '--max_old_space_size=240 --enable-source-maps'
+  MONGODB_URI:
+    name: MONGODB_URI
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: MONGODB_URI
+  MONGO_PASSWORD:
+    name: MONGO_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: MONGO_PASSWORD
+  MICROSERVICE_NAME:
+    name: MICROSERVICE_NAME
+    value: budget-checker-dev
+  SES_SMTP_USERNAME:
+    name: SES_SMTP_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SES_SMTP_USERNAME
+  SES_SMTP_PASSWORD:
+    name: SES_SMTP_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SES_SMTP_PASSWORD
+  SES_FROM_MAIL:
+    name: SES_FROM_MAIL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SES_FROM_MAIL
+  SES_HOST:
+    name: SES_HOST
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SES_HOST
+  SES_PORT:
+    name: SES_PORT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SES_PORT
+  EMAIL_FROM_NAME:
+    name: EMAIL_FROM_NAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: EMAIL_FROM_NAME
+  SNOWFLAKE_SCHEMA:
+    name: SNOWFLAKE_SCHEMA
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_SCHEMA
+  SNOWFLAKE_WAREHOUSE:
+    name: SNOWFLAKE_WAREHOUSE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_WAREHOUSE
+  SNOWFLAKE_INGESTION_WAREHOUSE:
+    name: SNOWFLAKE_INGESTION_WAREHOUSE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_INGESTION_WAREHOUSE
+  INTEGRATION_MICROSERVICE_URL:
+    name: INTEGRATION_MICROSERVICE_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: INTEGRATION_MICROSERVICE_URL
+  SNOWFLAKE_DB:
+    name: SNOWFLAKE_DB
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_DB
+  SNOWFLAKE_ACCOUNT:
+    name: SNOWFLAKE_ACCOUNT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_ACCOUNT
+  SNOWFLAKE_S3_STAGE_NAME:
+    name: SNOWFLAKE_S3_STAGE_NAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_S3_STAGE_NAME
+  SNOWFLAKE_ROLE:
+    name: SNOWFLAKE_ROLE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_ROLE
+  SNOWFLAKE_USERNAME:
+    name: SNOWFLAKE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_USERNAME
+  SNOWFLAKE_PASSWORD:
+    name: SNOWFLAKE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_PASSWORD
+  S3_BUCKET_IMG_DELIVERY:
+    name: S3_BUCKET_IMG_DELIVERY
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: S3_BUCKET_IMG_DELIVERY
+  AWS_REGION:
+    name: AWS_REGION
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AWS_REGION
+  AUTH0_CLIENT_ID:
+    name: AUTH0_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_CLIENT_ID
+  AUTH0_CLIENT_SECRET:
+    name: AUTH0_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_CLIENT_SECRET
+  AUTH0_ISSUER:
+    name: AUTH0_ISSUER
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_ISSUER
+  S3_SIGNING_ACCESS_KEY:
+    name: S3_SIGNING_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: S3_SIGNING_ACCESS_KEY
+  S3_SIGNING_SECRET_KEY:
+    name: S3_SIGNING_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: S3_SIGNING_SECRET_KEY
+  NODE_ENV:
+    name: NODE_ENV
+    value: 'production'
+  CANONICAL_ENV:
+    name: CANONICAL_ENV
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: CANONICAL_ENV
+  REDIS_HOST:
+    name: REDIS_HOST
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_HOST
+  REDIS_PORT:
+    name: REDIS_PORT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_PORT
+  PORT:
+    name: PORT
+    value: "8080"

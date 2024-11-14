@@ -1,0 +1,74 @@
+replicaCount: 1
+imagePullSecrets: []
+nameOverride: "dev-ai-gateway"
+fullnameOverride: "dev-ai-gateway"
+
+serviceAccount:
+  create: true
+ 
+
+name: dev-ai-gateway
+image:
+  pullPolicy: IfNotPresent
+  tag: bd624fhahahahahh278ddhaha429
+  command: [node, dist/apps/ai-gateway/apps/ai-gateway/src/main]
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "200m"
+    limits:
+      memory: "300Mi"
+      cpu: "200m"
+
+env:
+  MICROSERVICE_NAME:
+    name: MICROSERVICE_NAME
+    value: 'ai-gateway-dev'
+  OPENAI_API_KEY:
+    name: OPENAI_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: OPENAI_API_KEY
+  LLM_PROVIDER_NAME:
+    name: LLM_PROVIDER_NAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: LLM_PROVIDER_NAME
+  TOKENS_PER_MINUTE_LIMIT:
+    name: TOKENS_PER_MINUTE_LIMIT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: TOKENS_PER_MINUTE_LIMIT
+  TOKENS_PER_DAY_LIMIT:
+    name: TOKENS_PER_DAY_LIMIT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: TOKENS_PER_DAY_LIMIT
+  NODE_ENV:
+    name: NODE_ENV
+    value: 'production'
+  CANONICAL_ENV:
+    name: CANONICAL_ENV
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: CANONICAL_ENV
+  REDIS_HOST:
+    name: REDIS_HOST
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_HOST
+  REDIS_PORT:
+    name: REDIS_PORT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_PORT
+  PORT:
+    name: PORT
+    value: "8080"

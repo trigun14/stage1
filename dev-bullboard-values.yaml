@@ -1,0 +1,77 @@
+replicaCount: 1
+imagePullSecrets: []
+nameOverride: "dev-bullboard"
+fullnameOverride: "dev-bullboard"
+
+serviceAccount:
+  create: false
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: "alb"
+  annotations:
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
+  hosts:
+          pathType: ImplementationSpecific
+  tls: []
+
+name: dev-bullboard
+image:
+  containerPort: 3000
+  command: [node, src/index.js]
+  livenessProbe:
+    httpGet:
+      path:  /
+      port: http
+    initialDelaySeconds: 10
+    timeoutSeconds: 30
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 6
+  readinessProbe:
+    httpGet:
+      path:  /
+      port: http
+    initialDelaySeconds: 10
+    timeoutSeconds: 30
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 6
+  securityContext: {}
+  resources:
+    requests:
+      memory: "200Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "100m"
+
+env:
+  REDIS_USE_TLS:
+    name: REDIS_USE_TLS
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_USE_TLS
+  BULL_PREFIX:
+    name: BULL_PREFIX
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: BULL_PREFIX
+  REDIS_HOST:
+    name: REDIS_HOST
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_HOST
+  REDIS_PORT:
+    name: REDIS_PORT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_PORT

@@ -1,0 +1,97 @@
+replicaCount: 0
+imagePullSecrets: []
+nameOverride: "dev-catalog-automation"
+fullnameOverride: "dev-catalog-automation"
+
+name: dev-catalog-automation
+  tag: bd624fhahahahahh278ddhaha429
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "200m"
+    limits:
+      memory: "512Mi"
+      cpu: "200m"
+
+env:
+  SNOWFLAKE_DB:
+    name: SNOWFLAKE_DB
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_DB
+  MICROSERVICE_NAME:
+    name: MICROSERVICE_NAME
+    value: catalog-automation-dev
+  MONGODB_URI:
+    name: MONGODB_URI
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: MONGODB_URI
+  MONGO_PASSWORD:
+    name: MONGO_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: MONGO_PASSWORD
+  SNOWFLAKE_ACCOUNT:
+    name: SNOWFLAKE_ACCOUNT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_ACCOUNT
+  SNOWFLAKE_WAREHOUSE:
+    name: SNOWFLAKE_WAREHOUSE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_WAREHOUSE
+  SNOWFLAKE_INGESTION_WAREHOUSE:
+    name: SNOWFLAKE_INGESTION_WAREHOUSE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_INGESTION_WAREHOUSE
+  SNOWFLAKE_ROLE:
+    name: SNOWFLAKE_ROLE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_ROLE
+  SNOWFLAKE_USERNAME:
+    name: SNOWFLAKE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_USERNAME
+  SNOWFLAKE_PASSWORD:
+    name: SNOWFLAKE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_PASSWORD
+  NODE_ENV:
+    name: NODE_ENV
+    value: 'production'
+  CANONICAL_ENV:
+    name: CANONICAL_ENV
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: CANONICAL_ENV
+  REDIS_HOST:
+    name: REDIS_HOST
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_HOST
+  REDIS_PORT:
+    name: REDIS_PORT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_PORT
+  PORT:
+    name: PORT
+    value: "8080"

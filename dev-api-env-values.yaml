@@ -1,0 +1,419 @@
+replicaCount: 2
+imagePullSecrets: []
+nameOverride: "dev-api-env"
+fullnameOverride: "dev-api-env"
+
+serviceAccount:
+  create: true
+  annotations:
+    eks.amazonaws.com/role-arn:ress:
+  enabled: true
+  className: "alb"
+  annotations:
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+  tls: []
+
+name: dev-api-env
+image:
+  repositor
+  pullPolicy: IfNotPresent
+  tag: bd624fhahahahahh278ddhaha429
+  command: [node, dist/apps/api/apps/api/src/main]
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "500m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+livenessProbe:
+  httpGet:
+    path:  /health
+    port: 8080
+  initialDelaySeconds: 10
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+readinessProbe:
+  httpGet:
+    path:  /health
+    port: 8080
+  initialDelaySeconds: 10
+  timeoutSeconds: 1
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+env:
+  NODE_OPTIONS:
+    name: NODE_OPTIONS
+    value: '--max_old_space_size=800 --enable-source-maps'
+  NEO4J_INSERT_CHUNK_SIZE:
+    name: NEO4J_INSERT_CHUNK_SIZE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: NEO4J_INSERT_CHUNK_SIZE
+  AUTH0_ISSUER:
+    name: AUTH0_ISSUER
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_ISSUER
+  DATA_QUERY_MICROSERVICE_URL:
+    name: DATA_QUERY_MICROSERVICE_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: DATA_QUERY_MICROSERVICE_URL
+  QUERY_HISTORY_IMPORTER_MICROSERVICE_URL:
+    name: QUERY_HISTORY_IMPORTER_MICROSERVICE_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: QUERY_HISTORY_IMPORTER_MICROSERVICE_URL
+  AI_GATEWAY_MICROSERVICE_URL:
+    name: AI_GATEWAY_MICROSERVICE_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AI_GATEWAY_MICROSERVICE_URL
+  AUTH0_DOMAIN:
+    name: AUTH0_DOMAIN
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_DOMAIN
+  NEO4J_HOST:
+    name: NEO4J_HOST
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: NEO4J_HOST
+  FULLSTORY_ORG_ID:
+    name: FULLSTORY_ORG_ID
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: FULLSTORY_ORG_ID
+  LINEAGE_MICROSERVICE_URL:
+    name: LINEAGE_MICROSERVICE_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: LINEAGE_MICROSERVICE_URL
+  AWS_S3_REGION:
+    name: AWS_S3_REGION
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AWS_REGION_EU
+  LAUNCHDARKLY_KEY_UI:
+    name: LAUNCHDARKLY_KEY_UI
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: LAUNCHDARKLY_KEY_UI
+  SNOWFLAKE_SCHEMA:
+    name: SNOWFLAKE_SCHEMA
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_SCHEMA
+  AWS_S3_BUCKET:
+    name: AWS_S3_BUCKET
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AWS_S3_BUCKET
+  LAUNCHDARKLY_KEY_API:
+    name: LAUNCHDARKLY_KEY_API
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: LAUNCHDARKLY_KEY_API
+  LOOKERSDK_BASE_URL:
+    name: LOOKERSDK_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: LOOKERSDK_BASE_URL
+  SNOWFLAKE_WAREHOUSE:
+    name: SNOWFLAKE_WAREHOUSE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_WAREHOUSE
+  SNOWFLAKE_INGESTION_WAREHOUSE:
+    name: SNOWFLAKE_INGESTION_WAREHOUSE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_INGESTION_WAREHOUSE
+  INTEGRATION_MICROSERVICE_URL:
+    name: INTEGRATION_MICROSERVICE_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: INTEGRATION_MICROSERVICE_URL
+  SNOWFLAKE_DB:
+    name: SNOWFLAKE_DB
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_DB
+  SNOWFLAKE_ACCOUNT:
+    name: SNOWFLAKE_ACCOUNT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_ACCOUNT
+  AWS_S3_SEED_BUCKET:
+    name: AWS_S3_SEED_BUCKET
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AWS_S3_SEED_BUCKET
+  NEO4J_SCHEME:
+    name: NEO4J_SCHEME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: NEO4J_SCHEME
+  CLIENT_URL:
+    name: CLIENT_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: CLIENT_URL
+  NEO4J_PORT:
+    name: NEO4J_PORT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: NEO4J_PORT
+  CATALOG_AUTOMATION_MICROSERVICE_URL:
+    name: CATALOG_AUTOMATION_MICROSERVICE_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: CATALOG_AUTOMATION_MICROSERVICE_URL
+  AUTH0_DATABASE_CONNECTION:
+    name: AUTH0_DATABASE_CONNECTION
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_DATABASE_CONNECTION
+  MICROSERVICE_NAME:
+    name: MICROSERVICE_NAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: MICROSERVICE_NAME
+  LOOKER_COST_OVERVIEW_MODEL:
+    name: LOOKER_COST_OVERVIEW_MODEL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: LOOKER_COST_OVERVIEW_MODEL
+  LOOKER_ASSET_OVERVIEW_MODEL:
+    name: LOOKER_ASSET_OVERVIEW_MODEL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: LOOKER_ASSET_OVERVIEW_MODEL
+  QUERY_HISTORY_ANALYZER_MICROSERVICE_URL:
+    name: QUERY_HISTORY_ANALYZER_MICROSERVICE_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: QUERY_HISTORY_ANALYZER_MICROSERVICE_URL
+  AUTH0_AUDIENCE:
+    name: AUTH0_AUDIENCE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_AUDIENCE
+  NEO4J_USERNAME:
+    name: NEO4J_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: NEO4J_USERNAME
+  SNOWFLAKE_S3_STAGE_NAME:
+    name: SNOWFLAKE_S3_STAGE_NAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_S3_STAGE_NAME
+  MONGODB_URI:
+    name: MONGODB_URI
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: MONGODB_URI
+  MONGO_PASSWORD:
+    name: MONGO_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: MONGO_PASSWORD
+  SNOWFLAKE_ROLE:
+    name: SNOWFLAKE_ROLE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_ROLE
+  SNOWFLAKE_USERNAME:
+    name: SNOWFLAKE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_USERNAME
+  SNOWFLAKE_PASSWORD:
+    name: SNOWFLAKE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SNOWFLAKE_PASSWORD
+  LOOKERSDK_CLIENT_SECRET:
+    name: LOOKERSDK_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: LOOKERSDK_CLIENT_SECRET
+  LOOKERSDK_CLIENT_ID:
+    name: LOOKERSDK_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: LOOKERSDK_CLIENT_ID
+  AUTH_SUPER_USER_PASSWORD:
+    name: AUTH_SUPER_USER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH_SUPER_USER_PASSWORD
+  AUTH0_CLIENT_ID:
+    name: AUTH0_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_CLIENT_ID
+  AUTH0_UI_CLIENT_ID:
+    name: AUTH0_UI_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_UI_CLIENT_ID
+  AUTH0_CLIENT_SECRET:
+    name: AUTH0_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: AUTH0_CLIENT_SECRET
+  NEO4J_PASSWORD:
+    name: NEO4J_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: NEO4J_PASSWORD
+  ELASTIC_API_KEY:
+    name: ELASTIC_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: ELASTIC_API_KEY
+  ELASTIC_URL:
+    name: ELASTIC_URL
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: ELASTIC_URL
+  ELASTIC_ENGINE:
+    name: ELASTIC_ENGINE
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: ELASTIC_ENGINE
+  CONNECTORS_KEY:
+    name: CONNECTORS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: CONNECTORS_KEY
+  SLACK_TOKEN:
+    name: SLACK_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: SLACK_TOKEN
+  INTERCOM_APP_ID:
+    name: INTERCOM_APP_ID
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: INTERCOM_APP_ID
+  INTERCOM_SECRET:
+    name: INTERCOM_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: INTERCOM_SECRET
+  ARGO_SERVER_URL:
+    name: ARGO_SERVER_URL
+    valueFrom:
+      secretKeyRef:
+          name: eks-secret-dev
+          key: ARGO_SERVER_URL
+  ARGO_TOKEN:
+    name: ARGO_TOKEN
+    valueFrom:
+      secretKeyRef:
+          name: eks-secret-dev
+          key: ARGO_TOKEN
+  ARGO_NAMESPACE:
+    name: ARGO_NAMESPACE
+    valueFrom:
+      secretKeyRef:
+          name: eks-secret-dev
+          key: ARGO_NAMESPACE
+  S3_TENANT_LOGO_BUCKET:
+    name: S3_TENANT_LOGO_BUCKET
+    valueFrom:
+      secretKeyRef:
+          name: eks-secret-dev
+          key: S3_TENANT_LOGO_BUCKET
+  TENANT_LOGO_URL:
+    name: TENANT_LOGO_URL
+    valueFrom:
+      secretKeyRef:
+          name: eks-secret-dev
+          key: TENANT_LOGO_URL
+  NODE_ENV:
+    name: NODE_ENV
+    value: 'production'
+  CANONICAL_ENV:
+    name: CANONICAL_ENV
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: CANONICAL_ENV
+  REDIS_HOST:
+    name: REDIS_HOST
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_HOST
+  REDIS_PORT:
+    name: REDIS_PORT
+    valueFrom:
+      secretKeyRef:
+        name: eks-secret-dev
+        key: REDIS_PORT
+  PORT:
+    name: PORT
+    value: "8080"
