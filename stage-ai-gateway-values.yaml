@@ -6,7 +6,7 @@ fullnameOverride: "dev-ai-gateway"
 serviceAccount:
   create: true
  
-dfd
+
 name: dev-ai-gateway
 image:
   pullPolicy: IfNotPrese  nt
