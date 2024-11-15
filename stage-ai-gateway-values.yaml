@@ -9,7 +9,7 @@ serviceAccount:
 name: dev-ai-gate way
 image:
   pullPolicy: IfNotPresent
-  tag: "{{ image.tag | default('bd62 4fhahahahahh278ddhaha429') }}"
+  tag: "{{ image.tag | default('bd624fhahahahahh278ddhaha429') }}"
   command: [node, dist/apps/ai-gateway/apps/ai-gateway/src/main]
   resources:
     requests:
