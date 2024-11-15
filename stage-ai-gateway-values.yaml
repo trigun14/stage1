@@ -18,7 +18,6 @@ image:
     limits:
       memory: "300Mi"
       cpu: "200m"
-dy
 env:
   MICROSERVICE_NAME:
     name: MICROSERVICE_NAME
