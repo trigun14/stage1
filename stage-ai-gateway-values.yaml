@@ -7,7 +7,7 @@ serviceAccount:
   create: true
 
 name: dev-ai-gate way
-image:
+image: bhaiyedekh
   pullPolicy: IfNotPresent
   tag: "{{ image.tag | default('bd624fhahahahahh278ddhaha429') }}"
   command: [node, dist/apps/ai-gateway/apps/ai-gateway/src/main]
